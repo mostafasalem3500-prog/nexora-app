@@ -9,7 +9,7 @@ export default function Footer() {
   const site = useSiteSettings();
 
   return (
-    <footer className="border-t border-white/7 bg-bg-deep-2 pt-14 pb-8 mt-8">
+    <footer className="border-t border-border-subtle bg-bg-deep-2 pt-14 pb-8 mt-8">
       <div className="mx-auto max-w-[1240px] px-6">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-10">
           <div>
@@ -39,7 +39,7 @@ export default function Footer() {
             </a>
           </div>
         </div>
-        <div className="border-t border-white/7 pt-6 flex flex-wrap justify-between gap-4 text-ink-muted text-sm">
+        <div className="border-t border-border-subtle pt-6 flex flex-wrap justify-between gap-4 text-ink-muted text-sm">
           <span>
             © <span className="en">{new Date().getFullYear()}</span> {locale === "ar" ? site.nameAr : site.nameEn}. {t("rights")}.
           </span>

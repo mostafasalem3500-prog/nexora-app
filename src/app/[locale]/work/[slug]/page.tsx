@@ -31,13 +31,13 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
   return (
     <main id="main-content">
       <Header />
-      <section className="pt-40 pb-16 relative overflow-hidden" style={{ background: "radial-gradient(ellipse 500px 300px at 90% 0%, rgba(22,201,184,.14), transparent 60%), var(--bg-deep)" }}>
+      <section className="pt-40 pb-16 relative overflow-hidden" style={{ background: "radial-gradient(ellipse 500px 300px at 90% 0%, rgba(22,201,184,.14), transparent 60%), var(--surface-bg)" }}>
         <div className="mx-auto max-w-[1240px] px-6">
           <Link href="/work" className="text-brand-teal text-sm hover:underline">
             {locale === "ar" ? "→ كل الأعمال" : "→ All work"}
           </Link>
           <div className="flex items-center gap-3 mt-4 mb-3">
-            <span className="bg-black/30 border border-white/10 text-[.7rem] px-2.5 py-1 rounded-full text-ink-muted">
+            <span className="bg-surface-hover border border-border-subtle text-[.7rem] px-2.5 py-1 rounded-full text-ink-muted">
               {locale === "ar" ? "مشروع تجريبي لعرض القدرات" : "Demo project showcasing capability"}
             </span>
             <span className="text-brand-teal text-sm">{study.sector[locale]}</span>
@@ -61,7 +61,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             <p className="text-ink-muted leading-relaxed">{study.expectedOutcome[locale]}</p>
           </div>
         </div>
-        <aside className="h-fit rounded-2xl border border-white/8 bg-bg-deep-2 p-6">
+        <aside className="glow-card h-fit rounded-2xl border border-border-subtle bg-bg-deep-2 p-6">
           <h3 className="font-semibold mb-3">{locale === "ar" ? "لديك مشروع مشابه؟" : "Have a similar project?"}</h3>
           <Link
             href="/contact"

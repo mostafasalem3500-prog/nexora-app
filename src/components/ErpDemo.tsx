@@ -51,8 +51,8 @@ export default function ErpDemo() {
         </Reveal>
 
         <Reveal delay={0.1}>
-          <div className="rounded-2xl border border-white/8 bg-bg-deep-2 overflow-hidden">
-            <div className="flex overflow-x-auto border-b border-white/8 bg-white/[.02]">
+          <div className="rounded-2xl border border-border-subtle bg-bg-deep-2 overflow-hidden">
+            <div className="flex overflow-x-auto border-b border-border-subtle bg-surface-hover">
               {TABS.map((tb) => (
                 <button
                   key={tb.key}

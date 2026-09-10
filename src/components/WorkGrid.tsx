@@ -3,14 +3,15 @@ import Reveal from "@/components/Reveal";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
+import { Boxes, Plane, GraduationCap, ShoppingBag, MapPinned, HandHeart, type LucideIcon } from "lucide-react";
 
-const PROJECTS = [
-  { slug: "erp-services-co", cat: "services", sector: "قطاع الخدمات", name: "نظام ERP لشركة خدمات", desc: "توحيد المبيعات والمخزون والمحاسبة في نظام واحد بدل 3 أدوات منفصلة." },
-  { slug: "tourism-booking-app", cat: "commerce", sector: "السياحة والضيافة", name: "تطبيق حجوزات سياحية", desc: "حجز وإدارة رحلات مع تتبع لحظي وإشعارات للعملاء." },
-  { slug: "learning-platform", cat: "services", sector: "التعليم", name: "منصة تعليمية", desc: "مسارات تعلم تفاعلية مع متابعة تقدم الطالب وتقارير للمعلم." },
-  { slug: "multi-branch-store", cat: "commerce", sector: "التجارة", name: "متجر إلكتروني متعدد الفروع", desc: "مخزون موحّد عبر الفروع مع تقارير مبيعات مجمّعة." },
-  { slug: "gis-ops-dashboard", cat: "nonprofit", sector: "اللوجستيات", name: "لوحة عمليات وخرائط GIS", desc: "تتبع الموارد والمركبات جغرافيًا في الوقت الفعلي." },
-  { slug: "volunteer-events-system", cat: "nonprofit", sector: "القطاع غير الربحي", name: "نظام تطوع وإدارة فعاليات", desc: "تسجيل المتطوعين وجدولة المناوبات وقياس الأثر." },
+const PROJECTS: { slug: string; cat: string; sector: string; name: string; desc: string; icon: LucideIcon }[] = [
+  { slug: "erp-services-co", cat: "services", sector: "قطاع الخدمات", name: "نظام ERP لشركة خدمات", desc: "توحيد المبيعات والمخزون والمحاسبة في نظام واحد بدل 3 أدوات منفصلة.", icon: Boxes },
+  { slug: "tourism-booking-app", cat: "commerce", sector: "السياحة والضيافة", name: "تطبيق حجوزات سياحية", desc: "حجز وإدارة رحلات مع تتبع لحظي وإشعارات للعملاء.", icon: Plane },
+  { slug: "learning-platform", cat: "services", sector: "التعليم", name: "منصة تعليمية", desc: "مسارات تعلم تفاعلية مع متابعة تقدم الطالب وتقارير للمعلم.", icon: GraduationCap },
+  { slug: "multi-branch-store", cat: "commerce", sector: "التجارة", name: "متجر إلكتروني متعدد الفروع", desc: "مخزون موحّد عبر الفروع مع تقارير مبيعات مجمّعة.", icon: ShoppingBag },
+  { slug: "gis-ops-dashboard", cat: "nonprofit", sector: "اللوجستيات", name: "لوحة عمليات وخرائط GIS", desc: "تتبع الموارد والمركبات جغرافيًا في الوقت الفعلي.", icon: MapPinned },
+  { slug: "volunteer-events-system", cat: "nonprofit", sector: "القطاع غير الربحي", name: "نظام تطوع وإدارة فعاليات", desc: "تسجيل المتطوعين وجدولة المناوبات وقياس الأثر.", icon: HandHeart },
 ];
 
 export default function WorkGrid() {
@@ -29,7 +30,7 @@ export default function WorkGrid() {
                 key={f}
                 onClick={() => setFilter(f)}
                 className={`rounded-full px-4 py-1.5 text-sm border transition ${
-                  filter === f ? "bg-brand-blue border-brand-blue text-white" : "border-white/15 text-ink-muted"
+                  filter === f ? "bg-brand-blue border-brand-blue text-white" : "border-border-subtle-strong text-ink-muted"
                 }`}
               >
                 {t(`filters.${f}`)}
@@ -39,8 +40,9 @@ export default function WorkGrid() {
         </Reveal>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {PROJECTS.filter((p) => filter === "all" || p.cat === filter).map((p) => (
-            <Link href={`/work/${p.slug}`} key={p.name} className="rounded-xl border border-white/7 bg-bg-deep-2 overflow-hidden hover:-translate-y-1 transition block">
+            <Link href={`/work/${p.slug}`} key={p.name} className="glow-card rounded-xl border border-border-subtle bg-bg-deep-2 overflow-hidden hover:-translate-y-1 transition block">
               <div className="h-[150px] relative flex items-center justify-center bg-gradient-to-br from-brand-blue-dim to-bg-deep-2">
+                <p.icon size={36} className="text-white/70" />
                 <span className="absolute top-3 inset-inline-start-3 bg-black/45 text-[.68rem] px-2.5 py-1 rounded-full text-ink-muted">
                   {t("badge")}
                 </span>

@@ -63,9 +63,9 @@ export default function SolutionsAdvisor() {
         <div
           role="dialog"
           aria-label={t.title}
-          className="mb-4 w-[340px] max-w-[88vw] rounded-2xl border border-white/10 bg-bg-deep-2 shadow-2xl overflow-hidden"
+          className="mb-4 w-[340px] max-w-[88vw] rounded-2xl border border-border-subtle bg-bg-deep-2 shadow-2xl overflow-hidden"
         >
-          <div className="flex items-center justify-between px-5 py-4 border-b border-white/8">
+          <div className="flex items-center justify-between px-5 py-4 border-b border-border-subtle">
             <h3 className="font-bold text-sm">{t.title}</h3>
             <button
               onClick={toggle}
@@ -85,7 +85,7 @@ export default function SolutionsAdvisor() {
                     <button
                       key={c.slug}
                       onClick={() => setCategorySlug(c.slug)}
-                      className="w-full text-start rounded-lg border border-white/8 px-3.5 py-2.5 text-sm hover:border-brand-teal hover:bg-white/5 transition"
+                      className="w-full text-start rounded-lg border border-border-subtle px-3.5 py-2.5 text-sm hover:border-brand-teal hover:bg-surface-hover transition"
                     >
                       {c.name[locale]}
                     </button>
@@ -102,7 +102,7 @@ export default function SolutionsAdvisor() {
                     <button
                       key={s.slug}
                       onClick={() => setServiceSlug(s.slug)}
-                      className="w-full text-start rounded-lg border border-white/8 px-3.5 py-2.5 hover:border-brand-teal hover:bg-white/5 transition"
+                      className="w-full text-start rounded-lg border border-border-subtle px-3.5 py-2.5 hover:border-brand-teal hover:bg-surface-hover transition"
                     >
                       <div className="text-sm font-semibold">{s.name[locale]}</div>
                       <div className="text-xs text-ink-muted mt-0.5">{s.resultLine[locale]}</div>

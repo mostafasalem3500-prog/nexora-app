@@ -12,14 +12,14 @@ export default function PageHeader({
       className="relative overflow-hidden pt-40 pb-16"
       style={{
         background:
-          "radial-gradient(ellipse 500px 300px at 90% 0%, rgba(42,92,255,.16), transparent 60%), var(--bg-deep)",
+          "radial-gradient(ellipse 500px 300px at 90% 0%, rgba(42,92,255,.16), transparent 60%), var(--surface-bg)",
       }}
     >
       <div
         className="absolute inset-0 opacity-[.05]"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(231,236,245,.4) 1px, transparent 1px), linear-gradient(90deg, rgba(231,236,245,.4) 1px, transparent 1px)",
+            "linear-gradient(var(--surface-grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--surface-grid-line) 1px, transparent 1px)",
           backgroundSize: "48px 48px",
         }}
       />

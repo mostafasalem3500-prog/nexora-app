@@ -33,7 +33,7 @@ export default function Header() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-bg-deep/90 backdrop-blur-md shadow-[0_1px_0_rgba(255,255,255,.06)] py-3" : "py-5"
+        scrolled ? "bg-bg-deep/90 backdrop-blur-md shadow-[0_1px_0_var(--surface-border)] py-3" : "py-5"
       }`}
     >
       <div className="mx-auto max-w-[1240px] px-6 flex items-center justify-between gap-8">
@@ -70,7 +70,7 @@ export default function Header() {
             </button>
             {servicesOpen && (
               <div className="absolute top-full start-1/2 -translate-x-1/2 rtl:translate-x-1/2 pt-4 w-[560px] z-50">
-                <div className="rounded-xl border border-white/10 bg-bg-deep-2 shadow-2xl p-5 grid grid-cols-2 gap-4">
+                <div className="rounded-xl border border-border-subtle bg-bg-deep-2 shadow-2xl p-5 grid grid-cols-2 gap-4">
                   {serviceCategories.map((cat) => {
                     const items = getServicesByCategory(cat.slug).slice(0, 3);
                     return (
@@ -93,7 +93,7 @@ export default function Header() {
                   })}
                   <Link
                     href="/services"
-                    className="col-span-2 mt-1 text-center text-sm text-brand-teal border-t border-white/10 pt-3 hover:underline"
+                    className="col-span-2 mt-1 text-center text-sm text-brand-teal border-t border-border-subtle pt-3 hover:underline"
                   >
                     {locale === "ar" ? "عرض كل الخدمات ←" : "View all services →"}
                   </Link>
@@ -113,7 +113,7 @@ export default function Header() {
           <ThemeToggle />
           <Link
             href="/quote"
-            className="hidden md:inline-flex rounded-md border border-white/15 px-4 py-2 text-sm hover:border-brand-teal hover:text-brand-teal transition"
+            className="hidden md:inline-flex rounded-md border border-border-subtle-strong px-4 py-2 text-sm hover:border-brand-teal hover:text-brand-teal transition"
           >
             {t("cta")}
           </Link>
@@ -128,11 +128,11 @@ export default function Header() {
       </div>
 
       {menuOpen && (
-        <div className="md:hidden mx-4 mt-3 rounded-xl border border-white/10 bg-bg-deep-2 p-4 flex flex-col gap-1">
-          <Link href="/" onClick={() => setMenuOpen(false)} className="py-2.5 px-2 rounded-lg hover:bg-white/5 text-ink-muted hover:text-ink transition">
+        <div className="md:hidden mx-4 mt-3 rounded-xl border border-border-subtle bg-bg-deep-2 p-4 flex flex-col gap-1">
+          <Link href="/" onClick={() => setMenuOpen(false)} className="py-2.5 px-2 rounded-lg hover:bg-surface-hover text-ink-muted hover:text-ink transition">
             {t("home")}
           </Link>
-          <Link href="/services" onClick={() => setMenuOpen(false)} className="py-2.5 px-2 rounded-lg hover:bg-white/5 text-ink-muted hover:text-ink transition">
+          <Link href="/services" onClick={() => setMenuOpen(false)} className="py-2.5 px-2 rounded-lg hover:bg-surface-hover text-ink-muted hover:text-ink transition">
             {t("services")}
           </Link>
           {otherLinks.slice(1).map((l) => (
@@ -140,7 +140,7 @@ export default function Header() {
               key={l.href}
               href={l.href}
               onClick={() => setMenuOpen(false)}
-              className="py-2.5 px-2 rounded-lg hover:bg-white/5 text-ink-muted hover:text-ink transition"
+              className="py-2.5 px-2 rounded-lg hover:bg-surface-hover text-ink-muted hover:text-ink transition"
             >
               {l.label}
             </Link>

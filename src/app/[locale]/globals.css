@@ -25,6 +25,14 @@
   --surface-ink: var(--ink);
   --surface-ink-muted: var(--ink-muted);
   --surface-border: rgba(255, 255, 255, 0.08);
+  /* طبقات حدود/خلفيات إضافية متكيّفة مع الوضع — تحل محل الاستخدام المباشر
+     لـ border-white/N أو bg-white/N أو bg-black/N التي كانت ثابتة اللون
+     ولا تتكيّف عند التبديل إلى الوضع الفاتح */
+  --surface-border-strong: rgba(255, 255, 255, 0.18);
+  --surface-hover: rgba(255, 255, 255, 0.05);
+  --surface-active: rgba(255, 255, 255, 0.1);
+  --surface-grid-line: rgba(231, 236, 245, 0.4);
+  --surface-glow-shadow: rgba(0, 0, 0, 0.45);
 }
 
 [data-theme="light"] {
@@ -33,6 +41,11 @@
   --surface-ink: var(--ink-dark);
   --surface-ink-muted: var(--ink-dark-muted);
   --surface-border: rgba(19, 26, 40, 0.1);
+  --surface-border-strong: rgba(19, 26, 40, 0.22);
+  --surface-hover: rgba(19, 26, 40, 0.05);
+  --surface-active: rgba(19, 26, 40, 0.09);
+  --surface-grid-line: rgba(19, 26, 40, 0.35);
+  --surface-glow-shadow: rgba(19, 26, 40, 0.16);
 }
 
 @theme inline {
@@ -45,6 +58,10 @@
   --color-accent-violet: var(--accent-violet);
   --color-ink: var(--surface-ink);
   --color-ink-muted: var(--surface-ink-muted);
+  --color-border-subtle: var(--surface-border);
+  --color-border-subtle-strong: var(--surface-border-strong);
+  --color-surface-hover: var(--surface-hover);
+  --color-surface-active: var(--surface-active);
   --font-ar: var(--font-ar);
   --font-en: var(--font-en);
 }
@@ -89,6 +106,23 @@ body {
 :focus-visible {
   outline: 2px solid var(--brand-teal);
   outline-offset: 2px;
+}
+
+/* بطاقات بتوهج عند التمرير — تُضاف عبر className="glow-card" فوق أنماط
+   البطاقة الحالية (الحدود/الخلفية تبقى كما هي، هذا فقط يضيف الظل المتوهج) */
+.glow-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.glow-card:hover {
+  box-shadow: 0 18px 45px -22px var(--surface-glow-shadow), 0 0 0 1px var(--brand-teal);
+}
+
+/* أزرار بحركة مغناطيسية (MagneticButton) — الإزاحة تُحسب بجافاسكربت،
+   هنا فقط ضبط أساس الانتقال حتى يعود الزر بسلاسة لمكانه */
+.magnetic-btn {
+  display: inline-flex;
+  will-change: transform;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -2,6 +2,7 @@
 
 import { useLocale } from "next-intl";
 import Reveal from "@/components/Reveal";
+import { Quote } from "lucide-react";
 
 const ITEMS = [
   {
@@ -24,7 +25,7 @@ export default function Testimonials() {
     <section className="py-16 md:py-24">
       <div className="mx-auto max-w-[1240px] px-6">
         <Reveal className="max-w-xl mb-10">
-          <div className="inline-block bg-black/20 border border-white/10 text-[.7rem] px-3 py-1 rounded-full text-ink-muted mb-3">
+          <div className="inline-block bg-surface-hover border border-border-subtle text-[.7rem] px-3 py-1 rounded-full text-ink-muted mb-3">
             {locale === "ar" ? "محتوى تجريبي" : "Demo content"}
           </div>
           <h2 className="text-2xl md:text-3xl font-bold">
@@ -34,7 +35,8 @@ export default function Testimonials() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {ITEMS.map((it, i) => (
             <Reveal key={i} delay={i * 0.08}>
-              <div className="h-full rounded-xl border border-white/8 bg-bg-deep-2 p-6">
+              <div className="glow-card h-full rounded-xl border border-border-subtle bg-bg-deep-2 p-6">
+                <Quote size={20} className="text-brand-teal/60 mb-3" />
                 <p className="text-ink-muted leading-relaxed mb-4">&ldquo;{it[locale].quote}&rdquo;</p>
                 <span className="text-sm text-brand-teal">{it[locale].name}</span>
               </div>

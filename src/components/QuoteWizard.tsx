@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import MagneticButton from "@/components/MagneticButton";
 
 type WizardData = {
   solutionType: string;
@@ -84,7 +85,7 @@ export default function QuoteWizard({ locale }: { locale: "ar" | "en" }) {
     }
   }
 
-  const inputClass = "w-full rounded-md bg-bg-deep border border-white/12 px-4 py-2.5 text-ink placeholder:text-ink-muted/60 focus:outline-none focus:border-brand-teal transition";
+  const inputClass = "w-full rounded-md bg-bg-deep border border-border-subtle px-4 py-2.5 text-ink placeholder:text-ink-muted/60 focus:outline-none focus:border-brand-teal transition";
 
   if (status === "success") {
     return (
@@ -109,7 +110,7 @@ export default function QuoteWizard({ locale }: { locale: "ar" | "en" }) {
         {Array.from({ length: totalSteps }).map((_, i) => (
           <div
             key={i}
-            className={`h-1.5 flex-1 rounded-full transition-colors ${i < step ? "bg-brand-teal" : "bg-white/10"}`}
+            className={`h-1.5 flex-1 rounded-full transition-colors ${i < step ? "bg-brand-teal" : "bg-surface-active"}`}
           />
         ))}
       </div>
@@ -135,7 +136,7 @@ export default function QuoteWizard({ locale }: { locale: "ar" | "en" }) {
                     key={opt}
                     onClick={() => setData((d) => ({ ...d, solutionType: opt }))}
                     className={`rounded-md border px-4 py-3 text-sm text-start transition ${
-                      data.solutionType === opt ? "border-brand-teal text-brand-teal bg-brand-teal/5" : "border-white/12 text-ink-muted"
+                      data.solutionType === opt ? "border-brand-teal text-brand-teal bg-brand-teal/5" : "border-border-subtle text-ink-muted"
                     }`}
                   >
                     {opt}
@@ -192,7 +193,7 @@ export default function QuoteWizard({ locale }: { locale: "ar" | "en" }) {
                     <label
                       key={f}
                       className={`flex items-center gap-2.5 rounded-md border px-4 py-2.5 text-sm cursor-pointer transition ${
-                        checked ? "border-brand-teal text-ink" : "border-white/12 text-ink-muted"
+                        checked ? "border-brand-teal text-ink" : "border-border-subtle text-ink-muted"
                       }`}
                     >
                       <input
@@ -243,23 +244,23 @@ export default function QuoteWizard({ locale }: { locale: "ar" | "en" }) {
             <div>
               <h3 className="font-semibold mb-4">{isAr ? "مراجعة الطلب" : "Review your request"}</h3>
               <dl className="text-sm space-y-2 mb-5">
-                <div className="flex justify-between border-b border-white/8 pb-2">
+                <div className="flex justify-between border-b border-border-subtle pb-2">
                   <dt className="text-ink-muted">{isAr ? "نوع الحل" : "Solution type"}</dt>
                   <dd>{data.solutionType || "—"}</dd>
                 </div>
-                <div className="flex justify-between border-b border-white/8 pb-2">
+                <div className="flex justify-between border-b border-border-subtle pb-2">
                   <dt className="text-ink-muted">{isAr ? "الميزانية" : "Budget"}</dt>
                   <dd className="font-en">{data.budgetRange || "—"}</dd>
                 </div>
-                <div className="flex justify-between border-b border-white/8 pb-2">
+                <div className="flex justify-between border-b border-border-subtle pb-2">
                   <dt className="text-ink-muted">{isAr ? "الموعد" : "Timeline"}</dt>
                   <dd>{data.timeline || "—"}</dd>
                 </div>
-                <div className="flex justify-between border-b border-white/8 pb-2">
+                <div className="flex justify-between border-b border-border-subtle pb-2">
                   <dt className="text-ink-muted">{isAr ? "المزايا" : "Features"}</dt>
                   <dd className="text-end max-w-[60%]">{data.features.join("، ") || "—"}</dd>
                 </div>
-                <div className="flex justify-between border-b border-white/8 pb-2">
+                <div className="flex justify-between border-b border-border-subtle pb-2">
                   <dt className="text-ink-muted">{isAr ? "التواصل" : "Contact"}</dt>
                   <dd>
                     {data.contactName} · <span className="font-en">{data.contactEmail}</span>
@@ -289,7 +290,7 @@ export default function QuoteWizard({ locale }: { locale: "ar" | "en" }) {
         <button
           onClick={() => setStep((s) => Math.max(1, s - 1))}
           disabled={step === 1}
-          className="rounded-md px-5 py-2.5 text-sm border border-white/15 disabled:opacity-30 transition hover:border-brand-teal"
+          className="rounded-md px-5 py-2.5 text-sm border border-border-subtle-strong disabled:opacity-30 transition hover:border-brand-teal"
         >
           {isAr ? "السابق" : "Back"}
         </button>
@@ -302,13 +303,15 @@ export default function QuoteWizard({ locale }: { locale: "ar" | "en" }) {
             {isAr ? "التالي" : "Next"}
           </button>
         ) : (
-          <button
-            onClick={submit}
-            disabled={!data.privacyAccepted || status === "submitting"}
-            className="rounded-md px-6 py-2.5 text-sm font-semibold text-white bg-gradient-to-br from-brand-blue to-brand-blue-dim disabled:opacity-40 transition"
-          >
-            {status === "submitting" ? (isAr ? "جارٍ الإرسال..." : "Sending...") : isAr ? "إرسال الطلب" : "Send request"}
-          </button>
+          <MagneticButton>
+            <button
+              onClick={submit}
+              disabled={!data.privacyAccepted || status === "submitting"}
+              className="rounded-md px-6 py-2.5 text-sm font-semibold text-white bg-gradient-to-br from-brand-blue to-brand-blue-dim disabled:opacity-40 transition"
+            >
+              {status === "submitting" ? (isAr ? "جارٍ الإرسال..." : "Sending...") : isAr ? "إرسال الطلب" : "Send request"}
+            </button>
+          </MagneticButton>
         )}
       </div>
     </div>

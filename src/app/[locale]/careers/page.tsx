@@ -29,7 +29,7 @@ export default async function CareersPage() {
       <div className="mx-auto max-w-[900px] px-6 pb-24 space-y-4">
         {jobPostings.map((job, i) => (
           <Reveal key={job.slug} delay={i * 0.06}>
-            <div className="rounded-xl border border-white/8 bg-bg-deep-2 p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div className="glow-card rounded-xl border border-border-subtle bg-bg-deep-2 p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div>
                 <h3 className="font-semibold mb-1.5">{job.title[locale]}</h3>
                 <div className="flex gap-3 text-sm text-ink-muted flex-wrap">

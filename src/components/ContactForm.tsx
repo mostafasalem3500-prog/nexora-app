@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import MagneticButton from "@/components/MagneticButton";
 
 const schema = z.object({
   solutionType: z.string().min(1, "مطلوب"),
@@ -53,7 +54,7 @@ export default function ContactForm({ locale }: { locale: "ar" | "en" }) {
     }
   }
 
-  const inputClass = "w-full rounded-md bg-bg-deep border border-white/12 px-4 py-2.5 text-ink placeholder:text-ink-muted/60 focus:outline-none focus:border-brand-teal transition";
+  const inputClass = "w-full rounded-md bg-bg-deep border border-border-subtle px-4 py-2.5 text-ink placeholder:text-ink-muted/60 focus:outline-none focus:border-brand-teal transition";
   const errClass = "text-red-400 text-xs mt-1";
 
   return (
@@ -114,13 +115,15 @@ export default function ContactForm({ locale }: { locale: "ar" | "en" }) {
       </label>
       {errors.privacyAccepted && <p className={errClass}>{errors.privacyAccepted.message}</p>}
 
-      <button
-        type="submit"
-        disabled={isSubmitting}
-        className="w-full rounded-md px-6 py-3 font-semibold text-white bg-gradient-to-br from-brand-blue to-brand-blue-dim hover:-translate-y-0.5 transition disabled:opacity-60"
-      >
-        {isSubmitting ? t("جارٍ الإرسال...", "Sending...") : t("إرسال الطلب", "Send request")}
-      </button>
+      <MagneticButton className="w-full">
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="w-full rounded-md px-6 py-3 font-semibold text-white bg-gradient-to-br from-brand-blue to-brand-blue-dim hover:-translate-y-0.5 transition disabled:opacity-60"
+        >
+          {isSubmitting ? t("جارٍ الإرسال...", "Sending...") : t("إرسال الطلب", "Send request")}
+        </button>
+      </MagneticButton>
 
       {result && (
         <p className={result.ok ? "text-brand-teal text-sm" : "text-red-400 text-sm"}>{result.message}</p>

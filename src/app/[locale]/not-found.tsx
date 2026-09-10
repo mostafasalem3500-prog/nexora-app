@@ -9,14 +9,14 @@ export default function NotFound() {
       className="min-h-screen flex items-center justify-center px-6 relative overflow-hidden"
       style={{
         background:
-          "radial-gradient(ellipse 600px 400px at 50% 20%, rgba(42,92,255,.18), transparent 60%), var(--bg-deep)",
+          "radial-gradient(ellipse 600px 400px at 50% 20%, rgba(42,92,255,.18), transparent 60%), var(--surface-bg)",
       }}
     >
       <div
         className="absolute inset-0 opacity-[.06]"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(231,236,245,.4) 1px, transparent 1px), linear-gradient(90deg, rgba(231,236,245,.4) 1px, transparent 1px)",
+            "linear-gradient(var(--surface-grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--surface-grid-line) 1px, transparent 1px)",
           backgroundSize: "48px 48px",
         }}
       />
@@ -60,7 +60,7 @@ export default function NotFound() {
           </Link>
           <Link
             href="/services"
-            className="rounded-md px-6 py-3 font-semibold border border-white/20 hover:border-brand-teal hover:text-brand-teal transition"
+            className="rounded-md px-6 py-3 font-semibold border border-border-subtle-strong hover:border-brand-teal hover:text-brand-teal transition"
           >
             خدماتنا
           </Link>

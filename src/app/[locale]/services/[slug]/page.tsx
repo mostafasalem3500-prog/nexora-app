@@ -37,7 +37,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
   return (
     <main id="main-content">
       <Header />
-      <section className="pt-40 pb-16 relative overflow-hidden" style={{ background: "radial-gradient(ellipse 500px 300px at 90% 0%, rgba(42,92,255,.16), transparent 60%), var(--bg-deep)" }}>
+      <section className="pt-40 pb-16 relative overflow-hidden" style={{ background: "radial-gradient(ellipse 500px 300px at 90% 0%, rgba(42,92,255,.16), transparent 60%), var(--surface-bg)" }}>
         <div className="mx-auto max-w-[1240px] px-6">
           <Link href="/services" className="text-brand-teal text-sm hover:underline">
             {locale === "ar" ? "→ كل الخدمات" : "→ All services"}
@@ -71,7 +71,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
             <ol className="space-y-3">
               {steps.map((s, i) => (
                 <li key={s} className="flex gap-3 items-start">
-                  <span className="en shrink-0 w-7 h-7 rounded-full bg-bg-deep-2 border border-white/10 flex items-center justify-center text-sm text-brand-teal">
+                  <span className="en shrink-0 w-7 h-7 rounded-full bg-bg-deep-2 border border-border-subtle flex items-center justify-center text-sm text-brand-teal">
                     {i + 1}
                   </span>
                   <span className="text-ink-muted pt-0.5">{s}</span>
@@ -83,7 +83,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
             <h2 className="text-xl font-bold mb-4">{locale === "ar" ? "أسئلة شائعة" : "Frequently asked questions"}</h2>
             <div className="space-y-4">
               {faqsGlobal.map((f) => (
-                <div key={f.q.ar} className="rounded-xl border border-white/8 bg-bg-deep-2 p-5">
+                <div key={f.q.ar} className="glow-card rounded-xl border border-border-subtle bg-bg-deep-2 p-5">
                   <h3 className="font-semibold mb-1.5">{f.q[locale]}</h3>
                   <p className="text-ink-muted text-sm">{f.a[locale]}</p>
                 </div>
@@ -92,7 +92,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
           </div>
         </div>
 
-        <aside className="h-fit rounded-2xl border border-white/8 bg-bg-deep-2 p-6 sticky top-28">
+        <aside className="glow-card h-fit rounded-2xl border border-border-subtle bg-bg-deep-2 p-6 sticky top-28">
           <h3 className="font-semibold mb-2">{locale === "ar" ? "جاهز تبدأ؟" : "Ready to start?"}</h3>
           <p className="text-ink-muted text-sm mb-5">
             {locale === "ar" ? "احصل على استشارة مبدئية مجانية حول هذه الخدمة." : "Get a free initial consultation about this service."}

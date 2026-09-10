@@ -4,6 +4,7 @@ import PageHeader from "@/components/PageHeader";
 import ContactForm from "@/components/ContactForm";
 import { getLocale } from "next-intl/server";
 import type { Metadata } from "next";
+import { Mail, Clock } from "lucide-react";
 
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -30,17 +31,19 @@ export default async function ContactPage() {
         }
       />
       <div className="mx-auto max-w-[1240px] px-6 pb-24 grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-10">
-        <div className="rounded-2xl border border-white/8 bg-bg-deep-2 p-6 md:p-8">
+        <div className="rounded-2xl border border-border-subtle bg-bg-deep-2 p-6 md:p-8">
           <ContactForm locale={locale} />
         </div>
         <aside className="space-y-6">
-          <div className="rounded-xl border border-white/8 bg-bg-deep-2 p-6">
+          <div className="glow-card rounded-xl border border-border-subtle bg-bg-deep-2 p-6">
+            <Mail size={20} className="text-brand-teal mb-2.5" />
             <h3 className="font-semibold mb-2">{locale === "ar" ? "البريد الإلكتروني" : "Email"}</h3>
             <p className="text-ink-muted en" dir="ltr">
               info@nexora.local
             </p>
           </div>
-          <div className="rounded-xl border border-white/8 bg-bg-deep-2 p-6">
+          <div className="glow-card rounded-xl border border-border-subtle bg-bg-deep-2 p-6">
+            <Clock size={20} className="text-brand-teal mb-2.5" />
             <h3 className="font-semibold mb-2">{locale === "ar" ? "وقت الاستجابة" : "Response time"}</h3>
             <p className="text-ink-muted text-sm">
               {locale === "ar" ? "خلال يوم عمل واحد لكل الاستفسارات." : "Within one business day for all inquiries."}

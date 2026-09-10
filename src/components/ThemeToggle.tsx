@@ -23,7 +23,7 @@ export default function ThemeToggle() {
     <button
       onClick={toggle}
       aria-label={theme === "dark" ? "التبديل إلى الوضع الفاتح" : "التبديل إلى الوضع الداكن"}
-      className="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-sm hover:border-brand-teal transition shrink-0"
+      className="w-9 h-9 rounded-full border border-border-subtle-strong flex items-center justify-center text-sm hover:border-brand-teal transition shrink-0"
       title={theme === "dark" ? "الوضع الفاتح" : "الوضع الداكن"}
     >
       {theme === "dark" ? "☀️" : "🌙"}

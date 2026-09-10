@@ -25,7 +25,7 @@ export default async function QuotePage() {
         lead={locale === "ar" ? "يُحفَظ تقدّمك تلقائيًا إن غادرت الصفحة وعدت لاحقًا." : "Your progress saves automatically if you leave and come back."}
       />
       <div className="mx-auto max-w-[720px] px-6 pb-24">
-        <div className="rounded-2xl border border-white/8 bg-bg-deep-2 p-6 md:p-10">
+        <div className="rounded-2xl border border-border-subtle bg-bg-deep-2 p-6 md:p-10">
           <QuoteWizard locale={locale} />
         </div>
       </div>
