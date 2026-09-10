@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useState, useSyncExternalStore } from "react";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import MagneticButton from "@/components/MagneticButton";
 
 type WizardData = {
@@ -30,6 +30,31 @@ const EMPTY: WizardData = {
 
 const STORAGE_KEY = "nexora-quote-wizard";
 
+function loadSavedData(): WizardData {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    return saved ? { ...EMPTY, ...JSON.parse(saved) } : EMPTY;
+  } catch {
+    return EMPTY;
+  }
+}
+
+function subscribeNever() {
+  return () => {};
+}
+
+// يحدّد ما إذا تجاوزنا الـHydration فعليًا. أثناء الـSSR والـrender الأول
+// على المتصفح (الذي يجب أن يطابق HTML من الخادم) تُرجع false دائمًا؛
+// React يستدعيها مجددًا بعد التركيب فتُرجع true — عندها فقط نقرأ
+// localStorage ونستعيد التقدّم المحفوظ (انظر الاستخدام أدناه).
+function useIsHydrated() {
+  return useSyncExternalStore(
+    subscribeNever,
+    () => true,
+    () => false
+  );
+}
+
 const SOLUTION_OPTIONS_AR = ["موقع إلكتروني", "تطبيق جوال", "نظام ERP", "نظام CRM", "لوحة بيانات وذكاء أعمال", "أخرى"];
 const SOLUTION_OPTIONS_EN = ["Website", "Mobile app", "ERP system", "CRM system", "BI dashboard", "Other"];
 const FEATURE_OPTIONS_AR = ["دعم عربي RTL", "تطبيق جوال مرافق", "تكامل مع أنظمة حالية", "لوحة تحكم إدارية", "تقارير وتحليلات", "دعم متعدد اللغات"];
@@ -41,19 +66,34 @@ export default function QuoteWizard({ locale }: { locale: "ar" | "en" }) {
   const [data, setData] = useState<WizardData>(EMPTY);
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [reference, setReference] = useState("");
+  // انتقال الخطوات (AnimatePresence) ورسالة النجاح يتحركان تلقائيًا عند كل
+  // تغيير حالة — يُحترم prefers-reduced-motion صراحة بدل الاعتماد فقط على
+  // قاعدة CSS العامة التي لا تغطي حركة Framer Motion.
+  const shouldReduceMotion = useReducedMotion();
+
+  // استعادة التقدّم المحفوظ من localStorage بأمان عبر SSR: الـrender الأول
+  // على المتصفح يجب أن يطابق HTML الخادم تمامًا (data = EMPTY) وإلا ينتج
+  // React تحذير/خطأ Hydration Mismatch حقيقي (تم رصده فعليًا أثناء
+  // الاختبار) قد يترك الحقل المستعاد غير معروض بصريًا رغم صحة القيمة في
+  // الحالة. بعد التركيب مباشرة تصبح isHydrated=true فنستدعي setData أثناء
+  // الـrender نفسه (نمط "تعديل الحالة أثناء render" الموثّق في React —
+  // وليس داخل useEffect) بحارس من الحالة (وليس ref، لأن الكتابة على ref
+  // أثناء الـrender غير آمنة تحت الاستدعاء المضاعف لـStrict Mode)، فيُعاد
+  // الرسم فورًا بالقيمة الصحيحة دون مخالفة قاعدة react-hooks/set-state-in-effect.
+  const isHydrated = useIsHydrated();
+  const [restored, setRestored] = useState(false);
+  if (isHydrated && !restored) {
+    setRestored(true);
+    const saved = loadSavedData();
+    if (saved !== EMPTY) setData(saved);
+  }
 
   useEffect(() => {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved) setData(JSON.parse(saved));
-    } catch {}
-  }, []);
-
-  useEffect(() => {
+    if (!isHydrated) return;
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
     } catch {}
-  }, [data]);
+  }, [data, isHydrated]);
 
   const totalSteps = 7;
 
@@ -89,7 +129,12 @@ export default function QuoteWizard({ locale }: { locale: "ar" | "en" }) {
 
   if (status === "success") {
     return (
-      <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="text-center py-10">
+      <motion.div
+        initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={shouldReduceMotion ? { duration: 0 } : undefined}
+        className="text-center py-10"
+      >
         <div className="text-5xl mb-4">✅</div>
         <h2 className="text-xl font-bold mb-2">{isAr ? "تم استلام طلبك بنجاح" : "Your request has been received"}</h2>
         <p className="text-ink-muted mb-4">{isAr ? "رقمك المرجعي:" : "Your reference number:"}</p>
@@ -121,10 +166,10 @@ export default function QuoteWizard({ locale }: { locale: "ar" | "en" }) {
       <AnimatePresence mode="wait">
         <motion.div
           key={step}
-          initial={{ opacity: 0, x: isAr ? 16 : -16 }}
+          initial={shouldReduceMotion ? { opacity: 1, x: 0 } : { opacity: 0, x: isAr ? 16 : -16 }}
           animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: isAr ? -16 : 16 }}
-          transition={{ duration: 0.25 }}
+          exit={shouldReduceMotion ? { opacity: 1, x: 0 } : { opacity: 0, x: isAr ? -16 : 16 }}
+          transition={{ duration: shouldReduceMotion ? 0 : 0.25 }}
           className="min-h-[220px]"
         >
           {step === 1 && (

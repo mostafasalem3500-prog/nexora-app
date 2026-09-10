@@ -1,9 +1,15 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion, type Transition } from "framer-motion";
 import { Link } from "@/i18n/navigation";
 
 export default function NotFound() {
+  // حركات الدخول هنا تلقائية (initial/animate عند التحميل)، فتُحترم
+  // prefers-reduced-motion صراحة بدل الاعتماد فقط على قاعدة CSS العامة
+  // التي لا تغطي حركة Framer Motion.
+  const shouldReduceMotion = useReducedMotion();
+  const transition = (base: Transition): Transition => (shouldReduceMotion ? { duration: 0 } : base);
+
   return (
     <main
       className="min-h-screen flex items-center justify-center px-6 relative overflow-hidden"
@@ -22,34 +28,34 @@ export default function NotFound() {
       />
       <div className="relative z-10 text-center max-w-lg">
         <motion.div
-          initial={{ opacity: 0, scale: 0.7 }}
+          initial={shouldReduceMotion ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.7 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          transition={transition({ duration: 0.6, ease: "easeOut" })}
           className="font-en text-7xl md:text-8xl font-extrabold mb-6 bg-clip-text text-transparent"
           style={{ backgroundImage: "linear-gradient(135deg, var(--brand-blue), var(--brand-teal))" }}
         >
           404
         </motion.div>
         <motion.h1
-          initial={{ opacity: 0, y: 16 }}
+          initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.15 }}
+          transition={transition({ duration: 0.5, delay: 0.15 })}
           className="text-2xl font-bold mb-3"
         >
           هذه الصفحة غير موجودة
         </motion.h1>
         <motion.p
-          initial={{ opacity: 0, y: 16 }}
+          initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.25 }}
+          transition={transition({ duration: 0.5, delay: 0.25 })}
           className="text-ink-muted mb-8"
         >
           ربما تغيّر الرابط أو لم يعد متاحًا. ارجع للرئيسية أو استكشف خدماتنا.
         </motion.p>
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.35 }}
+          transition={transition({ duration: 0.5, delay: 0.35 })}
           className="flex gap-3 justify-center flex-wrap"
         >
           <Link

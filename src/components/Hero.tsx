@@ -1,23 +1,26 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { motion, type Variants } from "framer-motion";
+import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { Link } from "@/i18n/navigation";
 import MagneticButton from "@/components/MagneticButton";
 
 const bars = [62, 80, 45, 90, 70, 55, 85];
 
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 24 },
-  show: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, delay: i * 0.12, ease: "easeOut" },
-  }),
-};
-
 export default function Hero() {
   const t = useTranslations("hero");
+  // انتقالات الـHero تُشغَّل تلقائيًا عند التحميل (initial/animate)، لذا يجب
+  // احترام prefers-reduced-motion صراحة عبر useReducedMotion — قاعدة
+  // @media الموجودة في globals.css لا تغطي حركة Framer Motion.
+  const shouldReduceMotion = useReducedMotion();
+  const fadeUp: Variants = {
+    hidden: shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 },
+    show: (i: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: shouldReduceMotion ? { duration: 0 } : { duration: 0.6, delay: i * 0.12, ease: "easeOut" },
+    }),
+  };
 
   return (
     <section

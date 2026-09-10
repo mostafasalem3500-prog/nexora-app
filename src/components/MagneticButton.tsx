@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, type ReactNode, type MouseEvent } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { motion, useMotionValue, useReducedMotion, useSpring } from "framer-motion";
 
 // زر بحركة مغناطيسية: يتبع مؤشر الفأرة بإزاحة محدودة ثم يعود لمكانه بنعومة.
 // يُستخدم فوق الأزرار الأساسية فقط (CTA رئيسي) — تأثير بصري خفيف لا يغيّر
@@ -20,8 +20,12 @@ export default function MagneticButton({
   const y = useMotionValue(0);
   const springX = useSpring(x, { stiffness: 200, damping: 15, mass: 0.4 });
   const springY = useSpring(y, { stiffness: 200, damping: 15, mass: 0.4 });
+  // إزاحة الزر المستمرة خلف المؤشر نوع من الحركة المُحفّزة للدوار (vestibular)
+  // حتى لو كانت تفاعلية لا تلقائية، لذا تُعطَّل عند تفعيل prefers-reduced-motion.
+  const shouldReduceMotion = useReducedMotion();
 
   function handleMouseMove(e: MouseEvent<HTMLDivElement>) {
+    if (shouldReduceMotion) return;
     const el = ref.current;
     if (!el) return;
     const rect = el.getBoundingClientRect();

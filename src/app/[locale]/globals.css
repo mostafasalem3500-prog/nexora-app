@@ -13,9 +13,6 @@
   --ink-muted: #9aa7c2;
   --ink-dark: #131a28;
   --ink-dark-muted: #5b6472;
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
   --font-ar: "IBM Plex Sans Arabic", "Tahoma", sans-serif;
   --font-en: "Manrope", "Segoe UI", sans-serif;
 
@@ -46,6 +43,12 @@
   --surface-active: rgba(19, 26, 40, 0.09);
   --surface-grid-line: rgba(19, 26, 40, 0.35);
   --surface-glow-shadow: rgba(19, 26, 40, 0.16);
+  /* فيروزي أغمق خاص بالوضع الفاتح فقط: #16c9b8 الأصلي يعطي تباينًا 1.81:1
+     على --bg-warm (#f2efe6) وهو أقل بكثير من حد WCAG AA (4.5:1) لنص عادي.
+     هذه القيمة (#0e6259) تعطي 6.28:1 على نفس الخلفية — نفس درجة اللون
+     تقريبًا (hue ~174°) لكن أغمق، فتبقى الهوية البصرية متّسقة. الوضع الداكن
+     يستمر باستخدام --brand-teal الأصلي (تباين 8.85:1 على --bg-deep، ممتاز). */
+  --brand-teal: #0e6259;
 }
 
 @theme inline {
@@ -79,8 +82,7 @@ body {
   transition: background 0.3s ease, color 0.3s ease;
 }
 
-.en,
-.num {
+.en {
   font-family: var(--font-en);
   direction: ltr;
   unicode-bidi: isolate;

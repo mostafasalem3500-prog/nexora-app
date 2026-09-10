@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useInView, useMotionValue, useSpring } from "framer-motion";
+import { motion, useInView, useMotionValue, useReducedMotion, useSpring } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
 export default function AnimatedCounter({
@@ -17,6 +17,11 @@ export default function AnimatedCounter({
   const motionValue = useMotionValue(0);
   const spring = useSpring(motionValue, { duration: 1200 });
   const [display, setDisplay] = useState(0);
+  // العدّاد المتحرك (0 ← القيمة النهائية) حركة تلقائية بحتة، فتُعرض القيمة
+  // النهائية مباشرة بلا عدّ متحرك عند تفعيل prefers-reduced-motion — عبر
+  // حساب القيمة المعروضة أثناء الـrender بدل استدعاء setState إضافي داخل
+  // effect (الذي يخالف قاعدة react-hooks/set-state-in-effect).
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
     if (inView) motionValue.set(value);
@@ -27,9 +32,11 @@ export default function AnimatedCounter({
     return unsub;
   }, [spring]);
 
+  const shown = shouldReduceMotion ? (inView ? value : 0) : display;
+
   return (
     <motion.span ref={ref} className={className}>
-      {display}
+      {shown}
       {suffix}
     </motion.span>
   );
