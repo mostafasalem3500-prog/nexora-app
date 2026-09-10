@@ -1,0 +1,56 @@
+{
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "solutions": "Solutions",
+    "work": "Work",
+    "sectors": "Sectors",
+    "about": "About",
+    "cta": "Start Your Project"
+  },
+  "hero": {
+    "eyebrow": "One Integrated Digital System",
+    "titleStart": "We build the technology that",
+    "titleHighlight": "moves",
+    "titleEnd": "your business",
+    "lead": "From the first idea to a platform built to scale, we design and build the websites, apps, and enterprise systems that unify your operations and turn your data into decisions.",
+    "ctaPrimary": "Start Your Project",
+    "ctaSecondary": "Explore Our Work"
+  },
+  "trust": {
+    "items": ["Solutions that scale", "Native Arabic RTL experience", "Secure integrations", "Ongoing support & development", "Cloud-based systems", "Data-driven decisions"]
+  },
+  "solutions": {
+    "title": "One digital system for a smarter business",
+    "subtitle": "Hover any module to see how data flows between them.",
+    "default": "Hover any module above to see its role in the system."
+  },
+  "services": {
+    "title": "Services measured by outcome, not by their technical name",
+    "subtitle": "Every service is designed to solve a specific business problem — not to add technology for its own sake."
+  },
+  "work": {
+    "title": "Our Work",
+    "badge": "Demo project showcasing capability",
+    "filters": { "all": "All", "commerce": "Commerce", "services": "Services", "nonprofit": "Nonprofit" }
+  },
+  "journey": {
+    "title": "Project Delivery Journey",
+    "subtitle": "A clear methodology from idea to launch and ongoing support."
+  },
+  "sectors": { "title": "Solutions built for your sector" },
+  "cta": {
+    "title": "Have an idea? Let's build its digital future.",
+    "primary": "Request a Free Consultation",
+    "secondary": "Send Your Project Details"
+  },
+  "footer": {
+    "tagline": "We turn ideas into digital systems that work and grow",
+    "company": "Company",
+    "solutions": "Solutions",
+    "contact": "Contact",
+    "rights": "All rights reserved",
+    "privacy": "Privacy Policy",
+    "terms": "Terms & Conditions"
+  }
+}

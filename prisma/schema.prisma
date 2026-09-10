@@ -1,0 +1,216 @@
+// NEXORA TECH — Prisma Schema
+// provider = "postgresql" لأن قاعدة البيانات الآن على Railway.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  EDITOR
+  SALES
+}
+
+enum ContentStatus {
+  DRAFT
+  PUBLISHED
+}
+
+enum RequestStatus {
+  NEW
+  IN_REVIEW
+  QUOTED
+  WON
+  LOST
+}
+
+model SiteSettings {
+  id            String   @id @default("singleton")
+  nameAr        String   @default("نكسورا تك")
+  nameEn        String   @default("NEXORA TECH")
+  taglineAr     String   @default("نحوّل الأفكار إلى أنظمة رقمية تعمل وتنمو")
+  taglineEn     String   @default("We turn ideas into digital systems that work and grow")
+  logoUrl       String?
+  faviconUrl    String?
+  colorsJson    String   @default("{}") // JSON: { bgDeep, brandBlue, brandTeal, accentViolet, bgWarm }
+  fontsJson     String   @default("{}") // JSON: { ar, en }
+  email         String   @default("info@nexora.local")
+  phone         String?
+  whatsapp      String?
+  address       String?
+  socialJson    String   @default("{}")
+  seoJson       String   @default("{}")
+  currency      String   @default("SAR")
+  country       String   @default("SA")
+  isDemoIdentity Boolean @default(true)
+  updatedAt     DateTime @updatedAt
+}
+
+model ServiceCategory {
+  id        String    @id @default(cuid())
+  slug      String    @unique
+  nameAr    String
+  nameEn    String
+  icon      String?
+  order     Int       @default(0)
+  services  Service[]
+}
+
+model Service {
+  id            String          @id @default(cuid())
+  categoryId    String
+  category      ServiceCategory @relation(fields: [categoryId], references: [id])
+  slug          String          @unique
+  nameAr        String
+  nameEn        String
+  resultLineAr  String
+  resultLineEn  String
+  summaryAr     String?
+  summaryEn     String?
+  problemAr     String?
+  problemEn     String?
+  solutionAr    String?
+  solutionEn    String?
+  benefitsJson  String          @default("[]")
+  stepsJson     String          @default("[]")
+  techStackJson String          @default("[]")
+  sectorsJson   String          @default("[]")
+  faqsJson      String          @default("[]")
+  status        ContentStatus   @default(DRAFT)
+  order         Int             @default(0)
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+}
+
+model CaseStudy {
+  id              String        @id @default(cuid())
+  slug            String        @unique
+  nameAr          String
+  nameEn          String
+  sectorAr        String
+  sectorEn        String
+  problemAr       String
+  problemEn       String
+  solutionAr      String
+  solutionEn      String
+  techStackJson   String        @default("[]")
+  expectedOutcomeAr String
+  expectedOutcomeEn String
+  imagesJson      String        @default("[]")
+  isDemo          Boolean       @default(true)
+  status          ContentStatus @default(DRAFT)
+  order           Int           @default(0)
+  createdAt       DateTime      @default(now())
+}
+
+model Sector {
+  id           String   @id @default(cuid())
+  slug         String   @unique
+  nameAr       String
+  nameEn       String
+  descriptionAr String?
+  descriptionEn String?
+  order        Int      @default(0)
+}
+
+model Article {
+  id            String        @id @default(cuid())
+  slug          String        @unique
+  titleAr       String
+  titleEn       String
+  excerptAr     String?
+  excerptEn     String?
+  bodyAr        String
+  bodyEn        String
+  coverImage    String?
+  authorName    String?
+  status        ContentStatus @default(DRAFT)
+  publishedAt   DateTime?
+  createdAt     DateTime      @default(now())
+}
+
+model TeamMember {
+  id       String  @id @default(cuid())
+  name     String
+  roleAr   String
+  roleEn   String
+  photoUrl String?
+  bioAr    String?
+  bioEn    String?
+  order    Int     @default(0)
+}
+
+model JobPosting {
+  id           String        @id @default(cuid())
+  titleAr      String
+  titleEn      String
+  department   String?
+  location     String?
+  type         String?
+  descriptionAr String
+  descriptionEn String
+  status       ContentStatus @default(DRAFT)
+  createdAt    DateTime      @default(now())
+}
+
+model Testimonial {
+  id       String  @id @default(cuid())
+  quoteAr  String
+  quoteEn  String
+  nameLabel String  // اسم Placeholder معنون بوضوح كمحتوى تجريبي
+  roleLabel String?
+  isDemo   Boolean @default(true)
+  order    Int     @default(0)
+}
+
+model Faq {
+  id          String  @id @default(cuid())
+  questionAr  String
+  questionEn  String
+  answerAr    String
+  answerEn    String
+  scope       String  @default("global") // "global" أو serviceId
+  order       Int     @default(0)
+}
+
+model ProjectRequest {
+  id              String        @id @default(cuid())
+  referenceNumber String        @unique
+  solutionType    String
+  descriptionText String
+  budgetRange     String?
+  timeline        String?
+  featuresJson    String        @default("[]")
+  contactName     String
+  contactEmail    String
+  contactPhone    String?
+  briefFileUrl    String?
+  privacyAccepted Boolean       @default(false)
+  status          RequestStatus @default(NEW)
+  notesJson       String        @default("[]")
+  createdAt       DateTime      @default(now())
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  role         Role     @default(EDITOR)
+  lastLogin    DateTime?
+  createdAt    DateTime @default(now())
+}
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  userId     String
+  action     String
+  entityType String
+  entityId   String
+  diffJson   String   @default("{}")
+  createdAt  DateTime @default(now())
+}
