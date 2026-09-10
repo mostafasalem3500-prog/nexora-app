@@ -18,7 +18,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function SectorsPage() {
   const locale = (await getLocale()) as "ar" | "en";
   return (
-    <main>
+    <main id="main-content">
       <Header />
       <PageHeader
         eyebrow={locale === "ar" ? "القطاعات" : "Sectors"}

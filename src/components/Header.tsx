@@ -5,11 +5,13 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { useLocale } from "next-intl";
 import ThemeToggle from "@/components/ThemeToggle";
+import { useSiteSettings } from "@/components/SiteSettingsProvider";
 import { serviceCategories, getServicesByCategory } from "@/lib/site-data";
 
 export default function Header() {
   const t = useTranslations("nav");
   const locale = useLocale() as "ar" | "en";
+  const site = useSiteSettings();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
@@ -48,7 +50,7 @@ export default function Header() {
             </defs>
           </svg>
           <span>
-            نكسورا <span className="en">TECH</span>
+            {locale === "ar" ? site.nameAr : site.nameEn}
           </span>
         </Link>
 

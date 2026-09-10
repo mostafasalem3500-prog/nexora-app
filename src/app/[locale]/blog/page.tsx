@@ -21,7 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function BlogPage() {
   const locale = (await getLocale()) as "ar" | "en";
   return (
-    <main>
+    <main id="main-content">
       <Header />
       <PageHeader
         eyebrow={locale === "ar" ? "مركز المعرفة" : "Knowledge Center"}

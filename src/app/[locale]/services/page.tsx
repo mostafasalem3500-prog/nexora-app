@@ -20,7 +20,7 @@ export default async function ServicesPage() {
   const locale = (await getLocale()) as "ar" | "en";
 
   return (
-    <main>
+    <main id="main-content">
       <Header />
       <PageHeader
         eyebrow={locale === "ar" ? "دليل الخدمات" : "Services Directory"}

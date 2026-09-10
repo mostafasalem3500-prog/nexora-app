@@ -1,5 +1,6 @@
 import { getPrisma } from "@/lib/prisma";
 import { updateSiteSettings } from "./actions";
+import Link from "next/link";
 
 export default async function SettingsPage() {
   const prisma = getPrisma();
@@ -25,7 +26,12 @@ export default async function SettingsPage() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-2">إعدادات الهوية</h1>
+      <div className="flex items-center justify-between mb-2">
+        <h1 className="text-2xl font-bold">إعدادات الهوية</h1>
+        <Link href="/admin/settings/password" className="text-sm text-brand-teal hover:underline">
+          تغيير كلمة المرور ←
+        </Link>
+      </div>
       <p className="text-ink-muted text-sm mb-6">
         هذا هو مصدر الحقيقة الواحد لاسم الشركة وبياناتها — تعديله هنا يغيّر النص أينما ظهر (بعد ربط بقية الموقع بهذا المصدر).
       </p>

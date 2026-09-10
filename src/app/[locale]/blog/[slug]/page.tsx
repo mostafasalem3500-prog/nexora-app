@@ -26,7 +26,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   if (!article) notFound();
 
   return (
-    <main>
+    <main id="main-content">
       <Header />
       <section className="pt-40 pb-12">
         <div className="mx-auto max-w-[760px] px-6">

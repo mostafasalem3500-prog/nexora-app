@@ -35,7 +35,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
   const steps = locale === "ar" ? STEPS_AR : STEPS_EN;
 
   return (
-    <main>
+    <main id="main-content">
       <Header />
       <section className="pt-40 pb-16 relative overflow-hidden" style={{ background: "radial-gradient(ellipse 500px 300px at 90% 0%, rgba(42,92,255,.16), transparent 60%), var(--bg-deep)" }}>
         <div className="mx-auto max-w-[1240px] px-6">

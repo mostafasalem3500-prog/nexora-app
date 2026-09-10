@@ -4,6 +4,8 @@ import { getMessages } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { notFound } from "next/navigation";
 import ThemeScript from "@/components/ThemeScript";
+import { SiteSettingsProvider } from "@/components/SiteSettingsProvider";
+import { getSiteSettings } from "@/lib/get-site-settings";
 import "./globals.css";
 
 export function generateStaticParams() {
@@ -17,12 +19,11 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const isAr = locale === "ar";
-  const title = isAr ? "نكسورا تك | NEXORA TECH" : "NEXORA TECH | نكسورا تك";
-  const description = isAr
-    ? "نحوّل الأفكار إلى أنظمة رقمية تعمل وتنمو — مواقع، تطبيقات، وأنظمة مؤسسية (ERP/CRM) مصممة ومبرمجة بجودة عالية."
-    : "We turn ideas into digital systems that work and grow — websites, apps, and enterprise systems (ERP/CRM) designed and built to a high standard.";
+  const site = await getSiteSettings();
+  const title = isAr ? `${site.nameAr} | ${site.nameEn}` : `${site.nameEn} | ${site.nameAr}`;
+  const description = isAr ? site.taglineAr : site.taglineEn;
   return {
-    title: { default: title, template: `%s | ${isAr ? "نكسورا تك" : "NEXORA TECH"}` },
+    title: { default: title, template: `%s | ${isAr ? site.nameAr : site.nameEn}` },
     description,
     openGraph: { title, description, locale: isAr ? "ar_SA" : "en_US", type: "website" },
     twitter: { card: "summary_large_image", title, description },
@@ -42,6 +43,7 @@ export default async function LocaleLayout({
     notFound();
   }
   const messages = await getMessages();
+  const siteSettings = await getSiteSettings();
   const dir = locale === "ar" ? "rtl" : "ltr";
 
   return (
@@ -56,7 +58,12 @@ export default async function LocaleLayout({
         />
       </head>
       <body>
-        <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
+        <a href="#main-content" className="skip-link">
+          {locale === "ar" ? "تخطَّ إلى المحتوى الرئيسي" : "Skip to main content"}
+        </a>
+        <NextIntlClientProvider messages={messages}>
+          <SiteSettingsProvider value={siteSettings}>{children}</SiteSettingsProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

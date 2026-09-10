@@ -56,7 +56,7 @@ export default async function PrivacyPage() {
   const locale = (await getLocale()) as "ar" | "en";
   const content = locale === "ar" ? AR : EN;
   return (
-    <main>
+    <main id="main-content">
       <Header />
       <PageHeader title={locale === "ar" ? "سياسة الخصوصية" : "Privacy Policy"} />
       <div className="mx-auto max-w-[820px] px-6 pb-24 space-y-5 text-ink-muted leading-relaxed whitespace-pre-line">
