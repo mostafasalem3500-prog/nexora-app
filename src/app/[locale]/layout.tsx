@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import ThemeScript from "@/components/ThemeScript";
 import { SiteSettingsProvider } from "@/components/SiteSettingsProvider";
 import { getSiteSettings } from "@/lib/get-site-settings";
+import SolutionsAdvisor from "@/components/SolutionsAdvisor";
 import "./globals.css";
 
 export function generateStaticParams() {
@@ -62,7 +63,10 @@ export default async function LocaleLayout({
           {locale === "ar" ? "تخطَّ إلى المحتوى الرئيسي" : "Skip to main content"}
         </a>
         <NextIntlClientProvider messages={messages}>
-          <SiteSettingsProvider value={siteSettings}>{children}</SiteSettingsProvider>
+          <SiteSettingsProvider value={siteSettings}>
+            {children}
+            <SolutionsAdvisor />
+          </SiteSettingsProvider>
         </NextIntlClientProvider>
       </body>
     </html>

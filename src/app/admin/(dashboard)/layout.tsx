@@ -5,6 +5,7 @@ import Link from "next/link";
 const NAV = [
   { href: "/admin/dashboard", label: "نظرة عامة", roles: ["ADMIN", "EDITOR", "SALES"] },
   { href: "/admin/requests", label: "طلبات المشاريع", roles: ["ADMIN", "SALES"] },
+  { href: "/admin/users", label: "إدارة المستخدمين", roles: ["ADMIN"] },
   { href: "/admin/settings", label: "إعدادات الهوية", roles: ["ADMIN"] },
 ];
 
