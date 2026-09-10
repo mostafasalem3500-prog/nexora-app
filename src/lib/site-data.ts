@@ -95,3 +95,195 @@ export function getServiceBySlug(slug: string) {
 export function getCaseStudyBySlug(slug: string) {
   return caseStudies.find((c) => c.slug === slug);
 }
+
+export type Article = {
+  slug: string;
+  title: Bilingual;
+  excerpt: Bilingual;
+  body: Bilingual[]; // فقرات
+  category: Bilingual;
+  readMinutes: number;
+};
+
+export const articles: Article[] = [
+  {
+    slug: "why-erp-fails-without-process-mapping",
+    category: { ar: "أنظمة مؤسسية", en: "Enterprise Systems" },
+    readMinutes: 6,
+    title: {
+      ar: "لماذا تفشل مشاريع ERP بدون رسم العمليات أولًا؟",
+      en: "Why ERP Projects Fail Without Process Mapping First",
+    },
+    excerpt: {
+      ar: "أغلى غلطة في مشاريع ERP ليست في اختيار البرنامج، بل في تجاهل رسم العمليات الفعلية قبل البناء.",
+      en: "The costliest ERP mistake isn't choosing the wrong software — it's skipping process mapping before you build.",
+    },
+    body: [
+      {
+        ar: "كثير من الشركات تبدأ مشروع ERP بسؤال: أي نظام نشتري؟ وهذا سؤال مبكر جدًا. قبل اختيار أي برنامج، يجب رسم العمليات الفعلية كما تحدث اليوم — من استلام طلب العميل إلى إصدار الفاتورة — بكل استثناءاتها.",
+        en: "Many companies start an ERP project by asking: which software should we buy? That question comes too early. Before choosing any software, you need to map how processes actually happen today — from receiving a customer order to issuing the invoice — exceptions included.",
+      },
+      {
+        ar: "بدون هذه الخطوة، يُبنى النظام على افتراضات نظرية بدل الواقع الفعلي، فتظهر الفجوات بعد الإطلاق: خطوة موافقة منسية، أو حالة استثنائية يتعامل معها الموظفون يدويًا خارج النظام بالكامل.",
+        en: "Without this step, the system gets built on theoretical assumptions instead of reality, and gaps appear after launch: a forgotten approval step, or an exception case staff end up handling manually, entirely outside the system.",
+      },
+      {
+        ar: "التوصية العملية: خصّص أسبوعين على الأقل لرسم العمليات مع الموظفين الفعليين قبل كتابة أي سطر برمجي، وستوفر أشهرًا من إعادة العمل لاحقًا.",
+        en: "Practical recommendation: dedicate at least two weeks to mapping processes with the actual staff before writing a single line of code — it saves months of rework later.",
+      },
+    ],
+  },
+  {
+    slug: "arabic-rtl-mistakes-in-web-design",
+    category: { ar: "تصميم وتجربة مستخدم", en: "Design & UX" },
+    readMinutes: 5,
+    title: { ar: "5 أخطاء شائعة في تصميم واجهات عربية RTL", en: "5 Common Mistakes in Arabic RTL Interface Design" },
+    excerpt: {
+      ar: "ترجمة النصوص لا تكفي — التصميم العربي الصحيح يتطلب قلب الاتجاه المنطقي لا الشكلي فقط.",
+      en: "Translating text isn't enough — proper Arabic design requires flipping logical direction, not just appearance.",
+    },
+    body: [
+      {
+        ar: "الخطأ الأول: استخدام left/right في CSS بدل start/end، فتنكسر الواجهة عند التبديل بين العربية والإنجليزية بدل أن تتكيف تلقائيًا.",
+        en: "Mistake one: using left/right in CSS instead of start/end, which breaks the layout when switching between Arabic and English instead of adapting automatically.",
+      },
+      {
+        ar: "الخطأ الثاني: عدم قلب أيقونات الاتجاه (كالأسهم) مع اتجاه الصفحة، ما يجعلها تشير لجهة خاطئة منطقيًا.",
+        en: "Mistake two: not mirroring directional icons (like arrows) with the page direction, making them point the wrong logical way.",
+      },
+      {
+        ar: "الخطأ الثالث: خلط الأرقام والتواريخ الإنجليزية داخل جملة عربية بدون عزل اتجاهها (unicode-bidi)، فيتشوّه الترتيب البصري.",
+        en: "Mistake three: mixing English numbers and dates inside an Arabic sentence without isolating their direction (unicode-bidi), distorting the visual order.",
+      },
+    ],
+  },
+  {
+    slug: "choosing-between-crm-and-spreadsheet",
+    category: { ar: "مبيعات وعملاء", en: "Sales & CRM" },
+    readMinutes: 4,
+    title: { ar: "متى تحتاج فعلًا إلى CRM بدل جدول إكسل؟", en: "When Do You Actually Need a CRM Instead of a Spreadsheet?" },
+    excerpt: {
+      ar: "ليس كل فريق مبيعات يحتاج CRM فورًا. إليك العلامات الفعلية التي تدل على حاجتك الحقيقية.",
+      en: "Not every sales team needs a CRM right away. Here are the real signs that indicate you actually need one.",
+    },
+    body: [
+      {
+        ar: "إذا كان فريقك أقل من 3 أشخاص وصفقاتك قليلة وواضحة، فجدول إكسل منظّم قد يكون كافيًا مؤقتًا.",
+        en: "If your team is under 3 people and your deals are few and clear, a well-organized spreadsheet may be enough for now.",
+      },
+      {
+        ar: "العلامة الحقيقية للحاجة إلى CRM: فقدان متابعة العملاء بسبب تعدد الجداول، أو عدم معرفة من يتابع أي صفقة، أو تكرار التواصل مع نفس العميل من أكثر من موظف.",
+        en: "The real sign you need a CRM: losing track of customers across multiple spreadsheets, not knowing who owns which deal, or duplicate outreach to the same customer from different staff.",
+      },
+    ],
+  },
+  {
+    slug: "cloud-hosting-cost-mistakes",
+    category: { ar: "بنية تحتية", en: "Infrastructure" },
+    readMinutes: 5,
+    title: { ar: "3 أخطاء تكلفة شائعة عند اختيار الاستضافة السحابية", en: "3 Common Cost Mistakes When Choosing Cloud Hosting" },
+    excerpt: {
+      ar: "اختيار الاستضافة السحابية بناءً على السعر الظاهر فقط غالبًا ينتهي بفاتورة مفاجئة.",
+      en: "Choosing cloud hosting based only on the sticker price often ends in a surprise bill.",
+    },
+    body: [
+      {
+        ar: "الخطأ الأول: تجاهل تكلفة نقل البيانات (Egress) التي تُحتسب منفصلة عن تكلفة التشغيل الأساسية.",
+        en: "Mistake one: ignoring data-transfer (egress) costs, which are billed separately from base compute.",
+      },
+      {
+        ar: "الخطأ الثاني: عدم إعداد حدود تلقائية لتوسّع الموارد (Auto-scaling limits)، فيتضخم الاستهلاك دون رقابة عند أي زيادة مفاجئة في الزيارات.",
+        en: "Mistake two: not setting auto-scaling limits, letting usage balloon uncontrollably during any sudden traffic spike.",
+      },
+      {
+        ar: "الخطأ الثالث: الاعتماد على منصة واحدة مغلقة دون خطة خروج، ما يصعّب التفاوض على السعر لاحقًا.",
+        en: "Mistake three: relying on a single closed platform without an exit plan, which weakens your negotiating position later.",
+      },
+    ],
+  },
+  {
+    slug: "gis-for-non-gis-businesses",
+    category: { ar: "بيانات وذكاء اصطناعي", en: "Data & AI" },
+    readMinutes: 4,
+    title: { ar: "لماذا تحتاج شركتك خرائط GIS حتى لو لم تكن شركة نقل؟", en: "Why Your Company Needs GIS Even If You're Not a Logistics Business" },
+    excerpt: {
+      ar: "خرائط GIS ليست حكرًا على شركات النقل — أي عمل له عنصر ميداني يستفيد منها.",
+      en: "GIS mapping isn't exclusive to logistics companies — any business with a field component can benefit.",
+    },
+    body: [
+      {
+        ar: "أي نشاط يتضمن مواقع فعلية — فروع، عملاء، مركبات، أو حتى متطوعين — يستفيد من رؤية هذه البيانات على خريطة بدل جدول أرقام.",
+        en: "Any activity involving physical locations — branches, customers, vehicles, or even volunteers — benefits from seeing that data on a map instead of a table of numbers.",
+      },
+      {
+        ar: "مثال عملي: شركة صيانة منزلية استخدمت خرائط تفاعلية لتوزيع الفنيين حسب أقرب موقع، فقلّلت زمن الوصول دون زيادة عدد الفنيين.",
+        en: "A practical example: a home-maintenance company used interactive mapping to assign technicians by proximity, cutting response time without hiring more technicians.",
+      },
+    ],
+  },
+  {
+    slug: "automation-vs-headcount",
+    category: { ar: "ذكاء اصطناعي وأتمتة", en: "AI & Automation" },
+    readMinutes: 5,
+    title: { ar: "الأتمتة لا تعني تقليل الموظفين — بل تغيير ما يفعلونه", en: "Automation Isn't About Cutting Staff — It's About Changing What They Do" },
+    excerpt: {
+      ar: "أكثر خوف شائع من الأتمتة هو فقدان الوظائف. الواقع في أغلب الحالات مختلف تمامًا.",
+      en: "The most common fear about automation is job loss. In most real cases, the reality is quite different.",
+    },
+    body: [
+      {
+        ar: "الأتمتة الناجحة تستهدف المهام المتكررة عالية الحجم منخفضة القيمة الفكرية — مثل إدخال البيانات المكرر — لا القرارات التي تحتاج حكمًا بشريًا.",
+        en: "Successful automation targets high-volume, low-judgment repetitive tasks — like duplicate data entry — not decisions that require human judgment.",
+      },
+      {
+        ar: "النتيجة الشائعة: نفس الموظف يتحول من إدخال بيانات يدوي إلى مراجعة استثناءات فقط، وينتقل وقته لمهام تحتاج تفكيرًا فعليًا.",
+        en: "The common outcome: the same employee shifts from manual data entry to reviewing exceptions only, freeing their time for work that actually needs thinking.",
+      },
+    ],
+  },
+];
+
+export type JobPosting = {
+  slug: string;
+  title: Bilingual;
+  department: Bilingual;
+  location: Bilingual;
+  type: Bilingual;
+  description: Bilingual;
+};
+
+export const jobPostings: JobPosting[] = [
+  {
+    slug: "frontend-developer",
+    title: { ar: "مطوّر واجهات أمامية (Next.js)", en: "Frontend Developer (Next.js)" },
+    department: { ar: "الهندسة", en: "Engineering" },
+    location: { ar: "عن بُعد / السعودية", en: "Remote / Saudi Arabia" },
+    type: { ar: "دوام كامل", en: "Full-time" },
+    description: {
+      ar: "نبحث عن مطوّر واجهات متمكّن من React وNext.js وTailwind، لديه خبرة عملية في بناء واجهات عربية RTL.",
+      en: "We're looking for a frontend developer proficient in React, Next.js, and Tailwind, with hands-on experience building Arabic RTL interfaces.",
+    },
+  },
+  {
+    slug: "backend-developer",
+    title: { ar: "مطوّر خلفي (Node.js/PostgreSQL)", en: "Backend Developer (Node.js/PostgreSQL)" },
+    department: { ar: "الهندسة", en: "Engineering" },
+    location: { ar: "عن بُعد / السعودية", en: "Remote / Saudi Arabia" },
+    type: { ar: "دوام كامل", en: "Full-time" },
+    description: {
+      ar: "خبرة في تصميم قواعد بيانات علائقية وبناء واجهات API آمنة وقابلة للتوسع لأنظمة مؤسسية.",
+      en: "Experience designing relational databases and building secure, scalable APIs for enterprise systems.",
+    },
+  },
+  {
+    slug: "product-designer",
+    title: { ar: "مصمم منتج (UX/UI)", en: "Product Designer (UX/UI)" },
+    department: { ar: "التصميم", en: "Design" },
+    location: { ar: "عن بُعد / السعودية", en: "Remote / Saudi Arabia" },
+    type: { ar: "دوام كامل", en: "Full-time" },
+    description: {
+      ar: "تصميم تجارب مستخدم واضحة لأنظمة مؤسسية معقدة، مع حس قوي بالهوية البصرية العربية.",
+      en: "Design clear user experiences for complex enterprise systems, with a strong sense of Arabic visual identity.",
+    },
+  },
+];

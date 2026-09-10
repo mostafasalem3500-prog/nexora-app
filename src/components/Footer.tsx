@@ -20,7 +20,8 @@ export default function Footer() {
             <h5 className="font-semibold mb-3">{t("company")}</h5>
             <Link href="/about" className="block text-ink-muted text-sm mb-2 hover:text-brand-teal">من نحن</Link>
             <Link href="/work" className="block text-ink-muted text-sm mb-2 hover:text-brand-teal">أعمالنا</Link>
-            <Link href="/sectors" className="block text-ink-muted text-sm mb-2 hover:text-brand-teal">القطاعات</Link>
+            <Link href="/blog" className="block text-ink-muted text-sm mb-2 hover:text-brand-teal">مركز المعرفة</Link>
+            <Link href="/careers" className="block text-ink-muted text-sm mb-2 hover:text-brand-teal">الوظائف</Link>
           </div>
           <div>
             <h5 className="font-semibold mb-3">{t("solutions")}</h5>

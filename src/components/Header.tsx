@@ -24,6 +24,7 @@ export default function Header() {
     { href: "/", label: t("home") },
     { href: "/work", label: t("work") },
     { href: "/sectors", label: t("sectors") },
+    { href: "/blog", label: t("blog") },
     { href: "/about", label: t("about") },
   ];
 
@@ -109,7 +110,7 @@ export default function Header() {
         <div className="flex items-center gap-3">
           <ThemeToggle />
           <Link
-            href="/contact"
+            href="/quote"
             className="hidden md:inline-flex rounded-md border border-white/15 px-4 py-2 text-sm hover:border-brand-teal hover:text-brand-teal transition"
           >
             {t("cta")}
@@ -143,7 +144,7 @@ export default function Header() {
             </Link>
           ))}
           <Link
-            href="/contact"
+            href="/quote"
             onClick={() => setMenuOpen(false)}
             className="mt-2 text-center rounded-md bg-gradient-to-br from-brand-blue to-brand-blue-dim py-2.5 font-semibold text-white"
           >
