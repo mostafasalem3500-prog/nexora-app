@@ -2,17 +2,26 @@
 
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 export default function Header() {
   const t = useTranslations("nav");
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const links = [
+    { href: "/", label: t("home") },
+    { href: "/services", label: t("services") },
+    { href: "/work", label: t("work") },
+    { href: "/sectors", label: t("sectors") },
+    { href: "/about", label: t("about") },
+  ];
 
   return (
     <header
@@ -38,18 +47,50 @@ export default function Header() {
           </span>
         </Link>
         <nav className="hidden md:flex gap-7 text-[.95rem] text-ink-muted">
-          <a href="#hero" className="hover:text-ink">{t("home")}</a>
-          <a href="#services" className="hover:text-ink">{t("services")}</a>
-          <a href="#solutions" className="hover:text-ink">{t("solutions")}</a>
-          <a href="#work" className="hover:text-ink">{t("work")}</a>
-          <a href="#sectors" className="hover:text-ink">{t("sectors")}</a>
+          {links.map((l) => (
+            <Link key={l.href} href={l.href} className="hover:text-ink transition">
+              {l.label}
+            </Link>
+          ))}
         </nav>
         <div className="flex items-center gap-3">
-          <button className="rounded-md border border-white/15 px-4 py-2 text-sm hover:border-brand-teal hover:text-brand-teal transition">
+          <Link
+            href="/contact"
+            className="hidden md:inline-flex rounded-md border border-white/15 px-4 py-2 text-sm hover:border-brand-teal hover:text-brand-teal transition"
+          >
             {t("cta")}
+          </Link>
+          <button
+            className="md:hidden text-2xl leading-none"
+            aria-label="فتح القائمة"
+            onClick={() => setMenuOpen((v) => !v)}
+          >
+            {menuOpen ? "×" : "☰"}
           </button>
         </div>
       </div>
+
+      {menuOpen && (
+        <div className="md:hidden mx-4 mt-3 rounded-xl border border-white/10 bg-bg-deep-2 p-4 flex flex-col gap-1">
+          {links.map((l) => (
+            <Link
+              key={l.href}
+              href={l.href}
+              onClick={() => setMenuOpen(false)}
+              className="py-2.5 px-2 rounded-lg hover:bg-white/5 text-ink-muted hover:text-ink transition"
+            >
+              {l.label}
+            </Link>
+          ))}
+          <Link
+            href="/contact"
+            onClick={() => setMenuOpen(false)}
+            className="mt-2 text-center rounded-md bg-gradient-to-br from-brand-blue to-brand-blue-dim py-2.5 font-semibold text-white"
+          >
+            {t("cta")}
+          </Link>
+        </div>
+      )}
     </header>
   );
 }

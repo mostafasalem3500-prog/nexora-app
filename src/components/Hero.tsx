@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 
 const bars = [62, 80, 45, 90, 70, 55, 85];
 
@@ -32,12 +33,12 @@ export default function Hero() {
           </h1>
           <p className="text-ink-muted text-lg max-w-md mb-8">{t("lead")}</p>
           <div className="flex gap-4 flex-wrap">
-            <button className="rounded-md px-6 py-3 font-semibold text-white bg-gradient-to-br from-brand-blue to-brand-blue-dim hover:-translate-y-0.5 hover:shadow-[0_10px_30px_rgba(42,92,255,.35)] transition">
+            <Link href="/contact" className="rounded-md px-6 py-3 font-semibold text-white bg-gradient-to-br from-brand-blue to-brand-blue-dim hover:-translate-y-0.5 hover:shadow-[0_10px_30px_rgba(42,92,255,.35)] transition">
               {t("ctaPrimary")}
-            </button>
-            <button className="rounded-md px-6 py-3 font-semibold border border-white/20 hover:border-brand-teal hover:text-brand-teal transition">
+            </Link>
+            <Link href="/work" className="rounded-md px-6 py-3 font-semibold border border-white/20 hover:border-brand-teal hover:text-brand-teal transition">
               {t("ctaSecondary")}
-            </button>
+            </Link>
           </div>
         </div>
 

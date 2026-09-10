@@ -1,14 +1,15 @@
 "use client";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 
 const PROJECTS = [
-  { cat: "services", sector: "قطاع الخدمات", name: "نظام ERP لشركة خدمات", desc: "توحيد المبيعات والمخزون والمحاسبة في نظام واحد بدل 3 أدوات منفصلة." },
-  { cat: "commerce", sector: "السياحة والضيافة", name: "تطبيق حجوزات سياحية", desc: "حجز وإدارة رحلات مع تتبع لحظي وإشعارات للعملاء." },
-  { cat: "services", sector: "التعليم", name: "منصة تعليمية", desc: "مسارات تعلم تفاعلية مع متابعة تقدم الطالب وتقارير للمعلم." },
-  { cat: "commerce", sector: "التجارة", name: "متجر إلكتروني متعدد الفروع", desc: "مخزون موحّد عبر الفروع مع تقارير مبيعات مجمّعة." },
-  { cat: "nonprofit", sector: "اللوجستيات", name: "لوحة عمليات وخرائط GIS", desc: "تتبع الموارد والمركبات جغرافيًا في الوقت الفعلي." },
-  { cat: "nonprofit", sector: "القطاع غير الربحي", name: "نظام تطوع وإدارة فعاليات", desc: "تسجيل المتطوعين وجدولة المناوبات وقياس الأثر." },
+  { slug: "erp-services-co", cat: "services", sector: "قطاع الخدمات", name: "نظام ERP لشركة خدمات", desc: "توحيد المبيعات والمخزون والمحاسبة في نظام واحد بدل 3 أدوات منفصلة." },
+  { slug: "tourism-booking-app", cat: "commerce", sector: "السياحة والضيافة", name: "تطبيق حجوزات سياحية", desc: "حجز وإدارة رحلات مع تتبع لحظي وإشعارات للعملاء." },
+  { slug: "learning-platform", cat: "services", sector: "التعليم", name: "منصة تعليمية", desc: "مسارات تعلم تفاعلية مع متابعة تقدم الطالب وتقارير للمعلم." },
+  { slug: "multi-branch-store", cat: "commerce", sector: "التجارة", name: "متجر إلكتروني متعدد الفروع", desc: "مخزون موحّد عبر الفروع مع تقارير مبيعات مجمّعة." },
+  { slug: "gis-ops-dashboard", cat: "nonprofit", sector: "اللوجستيات", name: "لوحة عمليات وخرائط GIS", desc: "تتبع الموارد والمركبات جغرافيًا في الوقت الفعلي." },
+  { slug: "volunteer-events-system", cat: "nonprofit", sector: "القطاع غير الربحي", name: "نظام تطوع وإدارة فعاليات", desc: "تسجيل المتطوعين وجدولة المناوبات وقياس الأثر." },
 ];
 
 export default function WorkGrid() {
@@ -37,7 +38,7 @@ export default function WorkGrid() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {PROJECTS.filter((p) => filter === "all" || p.cat === filter).map((p) => (
-            <div key={p.name} className="rounded-xl border border-white/7 bg-bg-deep-2 overflow-hidden hover:-translate-y-1 transition">
+            <Link href={`/work/${p.slug}`} key={p.name} className="rounded-xl border border-white/7 bg-bg-deep-2 overflow-hidden hover:-translate-y-1 transition block">
               <div className="h-[150px] relative flex items-center justify-center bg-gradient-to-br from-brand-blue-dim to-bg-deep-2">
                 <span className="absolute top-3 inset-inline-start-3 bg-black/45 text-[.68rem] px-2.5 py-1 rounded-full text-ink-muted">
                   {t("badge")}
@@ -48,7 +49,7 @@ export default function WorkGrid() {
                 <h4 className="font-semibold mb-1.5">{p.name}</h4>
                 <p className="text-ink-muted text-sm">{p.desc}</p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
