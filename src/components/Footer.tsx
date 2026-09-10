@@ -1,5 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 
 export default function Footer() {
   const t = useTranslations("footer");
@@ -17,25 +18,26 @@ export default function Footer() {
           </div>
           <div>
             <h5 className="font-semibold mb-3">{t("company")}</h5>
-            <a href="#" className="block text-ink-muted text-sm mb-2 hover:text-brand-teal">من نحن</a>
-            <a href="#" className="block text-ink-muted text-sm mb-2 hover:text-brand-teal">منهجية العمل</a>
-            <a href="#" className="block text-ink-muted text-sm mb-2 hover:text-brand-teal">الوظائف</a>
+            <Link href="/about" className="block text-ink-muted text-sm mb-2 hover:text-brand-teal">من نحن</Link>
+            <Link href="/work" className="block text-ink-muted text-sm mb-2 hover:text-brand-teal">أعمالنا</Link>
+            <Link href="/sectors" className="block text-ink-muted text-sm mb-2 hover:text-brand-teal">القطاعات</Link>
           </div>
           <div>
             <h5 className="font-semibold mb-3">{t("solutions")}</h5>
-            <a href="#" className="block text-ink-muted text-sm mb-2 hover:text-brand-teal">ERP</a>
-            <a href="#" className="block text-ink-muted text-sm mb-2 hover:text-brand-teal">CRM</a>
-            <a href="#" className="block text-ink-muted text-sm mb-2 hover:text-brand-teal">الذكاء الاصطناعي</a>
+            <Link href="/services/erp" className="block text-ink-muted text-sm mb-2 hover:text-brand-teal">ERP</Link>
+            <Link href="/services/crm" className="block text-ink-muted text-sm mb-2 hover:text-brand-teal">CRM</Link>
+            <Link href="/services/ai-automation" className="block text-ink-muted text-sm mb-2 hover:text-brand-teal">الذكاء الاصطناعي</Link>
           </div>
           <div>
             <h5 className="font-semibold mb-3">{t("contact")}</h5>
-            <a href="#" className="en block text-ink-muted text-sm mb-2 hover:text-brand-teal" dir="ltr">info@nexora.sa</a>
+            <Link href="/contact" className="block text-ink-muted text-sm mb-2 hover:text-brand-teal">تواصل معنا</Link>
+            <a href="mailto:info@nexora.local" className="en block text-ink-muted text-sm mb-2 hover:text-brand-teal" dir="ltr">info@nexora.local</a>
           </div>
         </div>
         <div className="border-t border-white/7 pt-6 flex flex-wrap justify-between gap-4 text-ink-muted text-sm">
           <span>© <span className="en">{new Date().getFullYear()}</span> نكسورا تك. {t("rights")}.</span>
           <span>
-            <a href="#" className="hover:text-brand-teal">{t("privacy")}</a> · <a href="#" className="hover:text-brand-teal">{t("terms")}</a>
+            <Link href="/privacy" className="hover:text-brand-teal">{t("privacy")}</Link> · <Link href="/terms" className="hover:text-brand-teal">{t("terms")}</Link>
           </span>
         </div>
       </div>

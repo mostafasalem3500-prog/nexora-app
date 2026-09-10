@@ -1,4 +1,5 @@
 "use client";
+import Reveal from "@/components/Reveal";
 import { useTranslations } from "next-intl";
 
 const STEPS = [
@@ -15,10 +16,10 @@ export default function Journey() {
   return (
     <section id="journey" className="py-24">
       <div className="mx-auto max-w-[1240px] px-6">
-        <div className="max-w-xl mb-12">
+        <Reveal className="max-w-xl mb-12">
           <h2 className="text-3xl font-bold mb-3">{t("title")}</h2>
           <p className="text-ink-muted">{t("subtitle")}</p>
-        </div>
+        </Reveal>
         <div className="relative ps-8">
           <div className="absolute inset-inline-start-[.4rem] top-0 bottom-0 w-0.5 bg-gradient-to-b from-brand-blue to-brand-teal" />
           {STEPS.map((s) => (

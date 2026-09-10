@@ -1,5 +1,5 @@
 // NEXORA TECH — Prisma Schema
-// provider = "postgresql" لأن قاعدة البيانات الآن على Railway.
+// provider = "postgresql" لأن قاعدة البيانات على Railway.
 
 generator client {
   provider = "prisma-client-js"

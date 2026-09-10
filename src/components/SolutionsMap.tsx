@@ -1,4 +1,5 @@
 "use client";
+import Reveal from "@/components/Reveal";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 
@@ -20,10 +21,10 @@ export default function SolutionsMap() {
     <section id="solutions" className="py-24">
       <div className="mx-auto max-w-[1240px] px-6">
         <div className="rounded-2xl border border-white/6 bg-bg-deep-2 p-8 md:p-12">
-          <div className="text-center max-w-xl mx-auto mb-12">
+          <Reveal className="text-center max-w-xl mx-auto mb-12">
             <h2 className="text-3xl font-bold mb-3">{t("title")}</h2>
             <p className="text-ink-muted">{t("subtitle")}</p>
-          </div>
+          </Reveal>
           <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-1">
             {NODES.map((node, i) => (
               <div key={node.key} className="flex items-center md:contents">

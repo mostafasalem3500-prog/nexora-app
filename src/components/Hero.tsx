@@ -1,8 +1,19 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { motion, type Variants } from "framer-motion";
+import { Link } from "@/i18n/navigation";
 
 const bars = [62, 80, 45, 90, 70, 55, 85];
+
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 24 },
+  show: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, delay: i * 0.12, ease: "easeOut" },
+  }),
+};
 
 export default function Hero() {
   const t = useTranslations("hero");
@@ -26,19 +37,23 @@ export default function Hero() {
       />
       <div className="relative z-10 mx-auto max-w-[1240px] px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         <div>
-          <div className="text-brand-teal font-semibold mb-4">{t("eyebrow")}</div>
-          <h1 className="text-4xl md:text-5xl font-bold leading-[1.45] mb-6">
+          <motion.div custom={0} variants={fadeUp} initial="hidden" animate="show" className="text-brand-teal font-semibold mb-4">
+            {t("eyebrow")}
+          </motion.div>
+          <motion.h1 custom={1} variants={fadeUp} initial="hidden" animate="show" className="text-4xl md:text-5xl font-bold leading-[1.45] mb-6">
             {t("titleStart")} <span className="text-brand-teal">{t("titleHighlight")}</span> {t("titleEnd")}
-          </h1>
-          <p className="text-ink-muted text-lg max-w-md mb-8">{t("lead")}</p>
-          <div className="flex gap-4 flex-wrap">
-            <button className="rounded-md px-6 py-3 font-semibold text-white bg-gradient-to-br from-brand-blue to-brand-blue-dim hover:-translate-y-0.5 hover:shadow-[0_10px_30px_rgba(42,92,255,.35)] transition">
+          </motion.h1>
+          <motion.p custom={2} variants={fadeUp} initial="hidden" animate="show" className="text-ink-muted text-lg max-w-md mb-8">
+            {t("lead")}
+          </motion.p>
+          <motion.div custom={3} variants={fadeUp} initial="hidden" animate="show" className="flex gap-4 flex-wrap">
+            <Link href="/contact" className="rounded-md px-6 py-3 font-semibold text-white bg-gradient-to-br from-brand-blue to-brand-blue-dim hover:-translate-y-0.5 hover:shadow-[0_10px_30px_rgba(42,92,255,.35)] transition">
               {t("ctaPrimary")}
-            </button>
-            <button className="rounded-md px-6 py-3 font-semibold border border-white/20 hover:border-brand-teal hover:text-brand-teal transition">
+            </Link>
+            <Link href="/work" className="rounded-md px-6 py-3 font-semibold border border-white/20 hover:border-brand-teal hover:text-brand-teal transition">
               {t("ctaSecondary")}
-            </button>
-          </div>
+            </Link>
+          </motion.div>
         </div>
 
         <div className="relative h-[340px] md:h-[440px]">

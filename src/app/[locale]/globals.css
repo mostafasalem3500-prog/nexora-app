@@ -18,18 +18,33 @@
   --radius-lg: 16px;
   --font-ar: "IBM Plex Sans Arabic", "Tahoma", sans-serif;
   --font-en: "Manrope", "Segoe UI", sans-serif;
+
+  /* اللون الحالي: يتغيّر حسب data-theme، القيم أعلاه هي الافتراضي (داكن) */
+  --surface-bg: var(--bg-deep);
+  --surface-bg-2: var(--bg-deep-2);
+  --surface-ink: var(--ink);
+  --surface-ink-muted: var(--ink-muted);
+  --surface-border: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="light"] {
+  --surface-bg: var(--bg-warm);
+  --surface-bg-2: var(--bg-warm-2);
+  --surface-ink: var(--ink-dark);
+  --surface-ink-muted: var(--ink-dark-muted);
+  --surface-border: rgba(19, 26, 40, 0.1);
 }
 
 @theme inline {
-  --color-bg-deep: var(--bg-deep);
-  --color-bg-deep-2: var(--bg-deep-2);
+  --color-bg-deep: var(--surface-bg);
+  --color-bg-deep-2: var(--surface-bg-2);
   --color-bg-warm: var(--bg-warm);
   --color-brand-blue: var(--brand-blue);
   --color-brand-blue-dim: var(--brand-blue-dim);
   --color-brand-teal: var(--brand-teal);
   --color-accent-violet: var(--accent-violet);
-  --color-ink: var(--ink);
-  --color-ink-muted: var(--ink-muted);
+  --color-ink: var(--surface-ink);
+  --color-ink-muted: var(--surface-ink-muted);
   --font-ar: var(--font-ar);
   --font-en: var(--font-en);
 }
@@ -39,11 +54,12 @@ html {
 }
 
 body {
-  background: var(--bg-deep);
-  color: var(--ink);
+  background: var(--surface-bg);
+  color: var(--surface-ink);
   font-family: var(--font-ar);
   font-size: 17px;
   line-height: 1.8;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 .en,
