@@ -11,9 +11,10 @@ RUN apt-get update -y && apt-get install -y openssl && rm -rf /var/lib/apt/lists
 
 FROM base AS deps
 COPY package.json package-lock.json* ./
-# --ignore-scripts هنا لتفادي تشغيل "postinstall" (prisma generate) قبل نسخ
-# ملف الـschema؛ نولّده صراحة في الخطوة التالية بعد نسخ كامل المشروع.
-RUN npm ci --ignore-scripts
+# npm install بدل npm ci: أكثر تسامحًا مع فروقات طفيفة بين package.json
+# وlock file (مثل تلك الناتجة عن --legacy-peer-deps محليًا)، بينما npm ci
+# يتطلب تطابقًا حرفيًا صارمًا وقد يفشل بدون سبب حقيقي متعلق بصحة الحزم.
+RUN npm install --ignore-scripts
 
 FROM base AS builder
 COPY --from=deps /app/node_modules ./node_modules
