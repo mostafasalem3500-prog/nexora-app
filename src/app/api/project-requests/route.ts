@@ -2,11 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { getPrisma } from "@/lib/prisma";
 
-// ملاحظة: نستخدم (prisma as any) للوصول إلى نموذج ProjectRequest مؤقتًا،
-// لأن `npx prisma generate` لم يُشغَّل بعد في بيئة بدون قيود شبكية (انظر README).
-// بمجرد تشغيله (يحدث تلقائيًا عبر postinstall عند النشر على Railway)، هذا الكود
-// يعمل فعليًا بلا أي تعديل إضافي — الـ"as any" لا يغيّر سلوك التشغيل الفعلي.
-
 const requestSchema = z.object({
   solutionType: z.string().min(1),
   descriptionText: z.string().min(10),
@@ -42,7 +37,7 @@ export async function POST(req: NextRequest) {
 
   try {
     const prisma = getPrisma();
-    await (prisma as any).projectRequest.create({
+    await prisma.projectRequest.create({
       data: {
         referenceNumber,
         solutionType: parsed.data.solutionType,
